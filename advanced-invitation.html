@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Rahul & Nivi — Invitation (Advanced)</title>
+    <link rel="stylesheet" href="advanced-style.css">
+</head>
+<body>
+
+<!-- Background music with accessible controls -->
+<div class="music-bar">
+    <audio id="bgMusic" autoplay playsinline loop preload="auto">
+        <source src="Majnu-Bgm.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <button id="toggleMusic" aria-pressed="false">Play Music</button>
+    <button id="printBtn">Print Invitation</button>
+</div>
+
+<!-- Autoplay fallback overlay -->
+<div id="advPlayOverlay" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:linear-gradient(0deg, rgba(0,0,0,0.55), rgba(0,0,0,0.35));z-index:1600">
+    <button id="advOverlayBtn" style="background:linear-gradient(90deg,#ff9fb3,#ff5a8a);color:white;border:none;padding:18px 26px;border-radius:12px;font-size:18px;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,0.4)">Tap to Play Music</button>
+</div>
+
+<header class="adv-hero">
+    <div class="card-veil">
+        <h1>Rahul ❤️ Nivi</h1>
+        <p class="sub">Join us as we begin our forever — March 25, 2026</p>
+        <div class="rsvp-row">
+            <a class="rsvp-btn" href="mailto:rahul.nivi@example.com?subject=RSVP%20-%20Rahul%20%26%20Nivi">RSVP via Email</a>
+            <a class="rsvp-btn" href="#details">View Details</a>
+        </div>
+    </div>
+</header>
+
+<!-- Photo band similar to the design: centered blue strip with framed photos (auto-slider) -->
+<div class="photo-band">
+    <div class="photo-track">
+        <div class="photo-frame"><img src="images/groom.jpg" alt="Rahul"></div>
+        <div class="photo-frame"><img src="images/bride.jpg" alt="Nivi"></div>
+    </div>
+</div>
+
+<main>
+    <section id="details" class="details-adv">
+        <h2>Event Details</h2>
+        <div class="grid">
+            <div class="item">
+                <h3>Date & Time</h3>
+                <p>March 25, 2026 — 10:00 AM</p>
+            </div>
+            <div class="item">
+                <h3>Venue</h3>
+                <p>Sri Sundar Mahal, Sathyamangalam</p>
+            </div>
+            <div class="item">
+                <h3>Dress Code</h3>
+                <p>Traditional / Festive</p>
+            </div>
+            <div class="item">
+                <h3>Contact</h3>
+                <p>+91 99999 99999</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="attachments-adv">
+        <h2>Attachments</h2>
+        <p>Download the official invitation and schedule.</p>
+        <div class="attach-list">
+            <a href="attachments/invitation.pdf" download class="attach">Download Invitation (PDF)</a>
+            <a href="attachments/schedule.pdf" download class="attach">Download Schedule (PDF)</a>
+        </div>
+    </section>
+
+    <section class="map-adv">
+        <h2>Location</h2>
+        <div class="map-wrap">
+            <iframe src="https://www.google.com/maps?q=Sri+Sundar+Mahal+Sathyamangalam&output=embed" loading="lazy"></iframe>
+        </div>
+    </section>
+
+    <section class="gallery-adv reveal">
+        <h2>Gallery</h2>
+        <div class="gallery-grid">
+            <img src="images/groom.jpg" alt="Rahul smiling">
+            <img src="images/bride.jpg" alt="Nivi smiling">
+            <img src="images/background.jpg" alt="Venue preview">
+        </div>
+    </section>
+</main>
+
+<footer class="adv-footer">
+    <p>With Love — Rahul & Nivi</p>
+    <p class="small">Powered by the wedding site</p>
+</footer>
+
+<script>
+// Music toggle with cross-page sync
+const music = document.getElementById('bgMusic');
+const btn = document.getElementById('toggleMusic');
+
+
+async function playMusic(){
+    try{
+        music.muted = false;
+        music.volume = 0.8;
+        await music.play();
+        btn.textContent = 'Pause Music'; btn.setAttribute('aria-pressed','true');
+    }catch(e){
+        // audible autoplay blocked — try muted autoplay
+        try{
+            music.muted = true;
+            music.volume = 0;
+            await music.play();
+            showAdvOverlayUnmute();
+            // localStorage removed
+        }catch(err){
+            btn.textContent = 'Play Music'; btn.setAttribute('aria-pressed','false');
+        }
+    }
+}
+function pauseMusic(){ music.pause(); btn.textContent = 'Play Music'; btn.setAttribute('aria-pressed','false'); }
+
+function fadeVolume(el, target, duration){
+    return new Promise((res)=>{
+        const start = el.volume || 0;
+        const diff = target - start;
+        const stepMs = 50;
+        const steps = Math.max(1, Math.round(duration/stepMs));
+        let cur = 0;
+        const iv = setInterval(()=>{
+            cur++;
+            el.volume = Math.min(1, start + diff * (cur/steps));
+            if(cur >= steps){ clearInterval(iv); res(); }
+        }, stepMs);
+    });
+}
+
+function showAdvOverlayUnmute(){
+    const ov = document.getElementById('advPlayOverlay');
+    const btn = document.getElementById('advOverlayBtn');
+    if(!ov || !btn) return;
+    ov.style.display = 'flex';
+    btn.textContent = 'Tap to Unmute Music';
+    btn.onclick = async function(){
+        try{ music.muted = false; await fadeVolume(music, 0.8, 600); ov.style.display='none'; btn.textContent='Pause Music'; }
+        catch(e){}
+    };
+}
+
+btn.addEventListener('click', ()=>{ if(music.paused) playMusic(); else pauseMusic(); });
+
+// On load: attempt autoplay (best-effort) and show overlay if blocked
+window.addEventListener('load', ()=>{ playMusic().catch(()=>{ document.getElementById('advPlayOverlay').style.display='flex'; }); });
+
+// Autoplay fallback: attempt play and show overlay if blocked; start on interaction
+window.addEventListener('load', ()=>{
+    // try an immediate play (best-effort)
+    playMusic().catch(()=>{ document.getElementById('advPlayOverlay').style.display='flex'; });
+});
+['pointerdown','keydown','touchstart','click'].forEach(evt=>{
+    window.addEventListener(evt, function onFirst(){
+        window.removeEventListener(evt, onFirst);
+        playMusic().then(()=>{ document.getElementById('advPlayOverlay').style.display='none'; }).catch(()=>{});
+    });
+});
+const advOverlayBtn = document.getElementById('advOverlayBtn');
+advOverlayBtn && advOverlayBtn.addEventListener('click', ()=>{ playMusic().then(()=>{ document.getElementById('advPlayOverlay').style.display='none'; }); });
+
+// Print
+document.getElementById('printBtn').addEventListener('click', ()=> window.print());
+
+/* -- Auto-slider and reveal animations -- */
+(function(){
+    // Helper to build a seamless slider inside a container that has a .photo-track
+    function makeAutoSlider(container){
+        if(!container) return;
+        let track = container.querySelector('.photo-track');
+        if(!track) return;
+
+        // Duplicate the track content to allow seamless infinite scroll
+        track.innerHTML = track.innerHTML + track.innerHTML;
+
+        // Compute duration based on track width for comfortable speed
+        requestAnimationFrame(()=>{
+            const fullWidth = track.scrollWidth / 2; // original content width
+            const pxPerSec = 60; // tuning: lower -> slower motion
+            const secs = Math.max(12, Math.round(fullWidth / pxPerSec));
+            track.style.setProperty('--slider-duration', secs + 's');
+            // set direction to left-to-right (reverse animation) for an elegant flow
+            track.dataset.dir = 'ltr';
+
+            // If user prefers reduced motion, pause animations
+            const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if(prefersReduced){ track.dataset.paused = 'true'; }
+            else { track.dataset.anim = 'true'; }
+        });
+
+        // Pause on pointer interactions
+        ['pointerenter','touchstart','pointerdown'].forEach(ev=>{
+            container.addEventListener(ev, ()=> track.dataset.paused = 'true');
+        });
+        ['pointerleave','touchend','pointerup','touchcancel'].forEach(ev=>{
+            container.addEventListener(ev, ()=> track.dataset.paused = 'false');
+        });
+    }
+
+    // Initialize photo-band slider
+    document.querySelectorAll('.photo-band').forEach(makeAutoSlider);
+
+    // For gallery: convert images into a track so they slide too
+    document.querySelectorAll('.gallery-grid').forEach(g=>{
+        const imgs = Array.from(g.querySelectorAll('img'));
+        if(imgs.length === 0) return;
+        const track = document.createElement('div');
+        track.className = 'photo-track';
+        imgs.forEach(i=>{ const wrap = document.createElement('div'); wrap.className='photo-frame'; wrap.appendChild(i); track.appendChild(wrap); });
+        // replace gallery-grid children with track
+        g.innerHTML = '';
+        g.appendChild(track);
+        // duplicate track content
+        makeAutoSlider(g);
+    });
+
+    // Reveal-on-scroll for elements with .reveal
+    const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{ if(e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    },{threshold:0.12});
+    document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+
+    // Make hero visible on load
+    requestAnimationFrame(()=>{ document.querySelectorAll('.card-veil').forEach(el=>el.classList.add('visible')); });
+})();
+</script>
+
+</body>
+</html>
