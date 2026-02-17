@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background-color: grey;">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -8,7 +8,30 @@
 </head>
 <body>
 
-<!-- Background music with accessible controls -->
+<!-- Intro Heart Screen -->
+<!-- Intro Heart Screen -->
+<div id="introScreen">
+    <div class="intro-bg"></div>
+     
+
+    <div class="heart-container">
+        <p class="tap-text">Touch the Heart</p>
+
+        <div class="hand-pointer">👇</div>
+
+        <div class="big-heart">❤️</div>
+        <h2 class="intro-title">Rahul <span>❤️</span> Nivi</h2>
+        <p class="intro-quote">
+            "Two souls, one heart, and a lifetime of love."
+        </p>
+    </div>
+</div>
+
+
+
+<!-- Wrap Existing Content -->
+<div id="mainContent" style="display:none;background-color: grey">
+
 <!-- Floating hearts background -->
 <div class="hearts" aria-hidden="true">
     <span></span><span></span><span></span><span></span>
@@ -16,157 +39,130 @@
     <span></span><span></span><span></span><span></span>
     <span></span><span></span><span></span><span></span>
     <span></span><span></span><span></span><span></span>
-
 </div>
+
 <div class="music-bar">
-<audio id="bgMusic" autoplay muted playsinline loop preload="auto">
+<audio id="bgMusic" playsinline loop preload="auto">
         <source src="Majnu-Bgm.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
+</audio>
     <button id="toggleMusic" aria-pressed="false">
-        <svg class="icon-play" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
-        <svg class="icon-pause" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false" style="display:none"><path d="M6 19h4V5H6v14zM14 5v14h4V5h-4z" fill="currentColor"/></svg>
+        <svg class="icon-play" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z" fill="currentColor"/>
+        </svg>
+        <svg class="icon-pause" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="display:none">
+            <path d="M6 19h4V5H6v14zM14 5v14h4V5h-4z" fill="currentColor"/>
+        </svg>
         <span class="btn-text">Play Music</span>
     </button>
 </div>
-
-<!-- Autoplay fallback overlay -->
-<!-- <div id="advPlayOverlay" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:linear-gradient(0deg, rgba(0,0,0,0.55), rgba(0,0,0,0.35));z-index:1600">
-    <button id="advOverlayBtn" style="background:linear-gradient(90deg,#ff9fb3,#ff5a8a);color:white;border:none;padding:18px 26px;border-radius:12px;font-size:18px;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,0.4)">Tap to Play Music</button>
-</div> -->
 
 <header class="adv-hero">
     <div class="glass-card">
         <div class="glass-content">
             <h1 class="couple-names">Rahul <span>❤️</span> Nivi</h1>
             <p class="sub">Join us as we begin our forever — March 1, 2026</p>
-
             <div class="rsvp-row">
-                
-                <a class="rsvp-btn secondary" href="#details">
-                   View Details
-                </a>
+                <a class="rsvp-btn secondary" href="#details">View Details</a>
             </div>
         </div>
     </div>
 </header>
 
-
-<!-- Photo band similar to the design: centered blue strip with framed photos (auto-slider) -->
 <div class="photo-band">
     <div class="photo-track">
-
-        <div class="photo-frame">
-            <img src="images/Nivi.jpeg" alt="Nivi">
-        </div>
-
-        <div class="photo-frame">
-            <img src="images/Nivi.jpeg" alt="Nivi">
-        </div>
-
-        <!-- Duplicate same images for smooth infinite scroll -->
-        <div class="photo-frame">
-            <img src="images/Nivi.jpeg" alt="Nivi">
-        </div>
-
-        <div class="photo-frame">
-            <img src="images/Nivi.jpeg" alt="Nivi">
-        </div>
-
+        <div class="photo-frame"><img src="images/Nivi.jpeg"></div>
+        <div class="photo-frame"><img src="images/Nivi2.jpeg"></div>
+        <div class="photo-frame"><img src="images/Nivi4.jpeg"></div>
+        <div class="photo-frame"><img src="images/Nivi10.jpeg"></div>
+        <div class="photo-frame"><img src="images/Nivi30.jpeg"></div>
     </div>
 </div>
 
-
 <main>
-    <section id="details" class="details-adv">
-        <h2>Event Details</h2>
-        <div class="grid">
-            <div class="item">
-                <h3>Date & Time</h3>
-                <p>March 25, 2026 — 10:00 AM</p>
-            </div>
-            <div class="item">
-                <h3>Venue</h3>
-                <p>Sri Sundar Mahal, Sathyamangalam</p>
-            </div>
-            
-           
+<section id="details" class="details-adv">
+    <h2>Event Details</h2>
+    <div class="grid">
+
+        <div class="item">
+            <h3>Wedding Reception</h3>
+            <p>Sunday, March 1, 2026</p>
+            <p>6:00 PM – 9:00 PM</p>
         </div>
-    </section>
-    
+
+        <div class="item">
+            <h3>Subha Muhurtham Ceremony</h3>
+            <p>Monday, March 2, 2026</p>
+            <p>4:30 AM – 5:30 AM</p>
+            <p>Arul Migu Bannariamman Thirukovil</p>
+        </div>
+
+    </div>
+</section>
 
 
-    <section class="attachments-adv">
-        <h2>Attachments</h2>
-        <p>Download the invitation.</p>
-        <div class="attach-list">
-            <a href="images/invitation.gif" download="Rahul-Nivi-Invitation.gif" class="attach">Download Invitation (GIF)</a>
-        </div>
-    </section>
 
-    <section class="map-adv">
-        <h2>Location</h2>
-        <div class="map-wrap">
-            <iframe src="https://www.google.com/maps?q=Sri+Sundar+Mahal+Sathyamangalam&output=embed" loading="lazy"></iframe>
-        </div>
-    </section>
+<section class="attachments-adv">
+    <h2>Attachments</h2>
+    <div class="attach-list">
+        <a href="images/invitation.gif" download class="attach">
+            Download Invitation (GIF)
+        </a>
+    </div>
+</section>
 
-    <section class=" gallery-adv reveal">
-        <h2>Gallery</h2>
-        <div class="gallery-grid">
-            <img src="images/Nivi.jpeg" alt="Rahul smiling">
-            <img src="images/Nivi.jpeg" alt="Nivi smiling">
-            <img src="images/Nivi.jpeg" alt="Venue preview">
-        </div>
-    </section>
-   
+<section class="map-adv">
+    <h2>Wedding Reception Location</h2>
+    <div class="map-wrap">
+        <iframe src="https://www.google.com/maps?q=Sri+Sundar+Mahal+Sathyamangalam&output=embed" loading="lazy"></iframe>
+    </div>
+</section>
+<section class="map-adv">
+    <h2>Subha Muhurtham Ceremony Location</h2>
+    <div class="map-wrap">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3908.988588109426!2d77.13664657551882!3d11.552675544395317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba8d8ed9ff25de1%3A0xf428adee1ec7abcb!2sArulmigu%20Bannari%20Mariamman%20Temple%2C%20Bannari!5e0!3m2!1sen!2sin!4v1771260085042!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+</section>
+
+<section class="gallery-adv reveal">
+    <h2>Gallery</h2>
+    <div class="gallery-grid">
+        <img src="images/Nivi.jpeg">
+        <img src="images/Nivi2.jpeg">
+        <img src="images/Nivi4.jpeg">
+         <img src="images/Nivi10.jpeg">
+          <img src="images/Nivi30.jpeg">
+         
+    </div>
+</section>
 </main>
 
 <footer class="adv-footer">
-    <p>With Love — Rahul & Nivi <span>❤️</span></p>
+    <p>With Love — Rahul & Nivi ❤️</p>
 </footer>
+
+</div> <!-- End mainContent -->
+
+<!-- Scroll Reveal Script -->
 <script>
 const reveals = document.querySelectorAll(".reveal");
-
 function revealOnScroll() {
     const windowHeight = window.innerHeight;
-
     reveals.forEach(section => {
         const elementTop = section.getBoundingClientRect().top;
-
         if (elementTop < windowHeight - 100) {
             section.classList.add("visible");
         }
     });
 }
-
 window.addEventListener("scroll", revealOnScroll);
 window.addEventListener("load", revealOnScroll);
 </script>
 
-
+<!-- Music Toggle -->
 <script>
 const music = document.getElementById("bgMusic");
 const toggleBtn = document.getElementById("toggleMusic");
 
-// Try autoplay muted
-window.addEventListener("load", () => {
-    music.play().catch(() => {
-        console.log("Autoplay blocked");
-    });
-});
-
-// First interaction → unmute
-function enableSound() {
-    music.muted = false;
-    music.volume = 0.8;
-    music.play();
-    document.removeEventListener("click", enableSound);
-}
-
-document.addEventListener("click", enableSound);
-
-// Toggle button with icon swap
 toggleBtn.addEventListener('click', () => {
     const playIcon = toggleBtn.querySelector('.icon-play');
     const pauseIcon = toggleBtn.querySelector('.icon-pause');
@@ -177,14 +173,50 @@ toggleBtn.addEventListener('click', () => {
         btnText.textContent = 'Pause Music';
         playIcon.style.display = 'none';
         pauseIcon.style.display = '';
-        toggleBtn.setAttribute('aria-pressed', 'true');
     } else {
         music.pause();
         btnText.textContent = 'Play Music';
         playIcon.style.display = '';
         pauseIcon.style.display = 'none';
-        toggleBtn.setAttribute('aria-pressed', 'false');
     }
+});
+</script>
+
+<!-- Intro Heart Script -->
+<script>
+const intro = document.getElementById("introScreen");
+const mainContent = document.getElementById("mainContent");
+const heart = document.querySelector(".heart-container");
+
+heart.addEventListener("click", () => {
+    music.volume = 0.8;
+    music.play();
+
+    intro.style.opacity = "0";
+    setTimeout(() => {
+        intro.style.display = "none";
+        mainContent.style.display = "block";
+    }, 600);
+});
+</script>
+<script>
+const langBtn = document.getElementById("langToggle");
+const tapText = document.getElementById("tapText");
+const quoteText = document.getElementById("quoteText");
+
+let isEnglish = true;
+
+langBtn.addEventListener("click", () => {
+    if (isEnglish) {
+        tapText.textContent = "இதயத்தை தொட்டு";
+        quoteText.textContent = "இரண்டு ஆன்மாக்கள், ஒரு இதயம், ஒரு ஆயுள் முழுவதும் அன்பு.";
+        langBtn.textContent = "English";
+    } else {
+        tapText.textContent = "Touch the Heart";
+        quoteText.textContent = "Two souls, one heart, and a lifetime of love.";
+        langBtn.textContent = "தமிழ்";
+    }
+    isEnglish = !isEnglish;
 });
 </script>
 
